@@ -1,4 +1,5 @@
 {
-    "editor.fontSize": 18,
-    "files.autoSave": "onFocusChange"
+    "editor.fontSize": 20,
+    "files.autoSave": "onFocusChange",
+    "editor.accessibilityPageSize": 10
 }
