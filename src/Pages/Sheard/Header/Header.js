@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../../assets/logo.svg'
+import logo from '../../../assets/logo.svg';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Header = () => {
+  const {user} = useContext(AuthContext)
     const menuItem = <>
       <li className='font-semibold'><Link to="/">Home</Link></li>
-      <li className='font-semibold'><Link to="/">about</Link></li>
-      <li className='font-semibold'><Link to="/">services</Link></li>
+      <li className='font-semibold'><Link to="services">services</Link></li>
+      <li className='font-semibold'><Link to="products">products</Link></li>
+      <li className='font-semibold'><Link to="about">about</Link></li>
+      <div className="">
+     {
+       user?.email?
+         <li className='font-semibold'> <Link to="/orders">orders</Link></li>
+       : 
+       <></>
+     }
+      </div>
+      <div className="s">
+       {
+        user?.email?
+        <></>
+        :
+        <Link className='btn btn-outline outline-primary-focus ml-4' to="/login">Login</Link>
+       } 
+      </div> 
     </>
     return (
         <div>
@@ -30,7 +49,18 @@ const Header = () => {
               </ul>
             </div>
             <div className="navbar-end">
-              <a href=' ' className=" btn btn-outline btn-warning">Appointment</a>
+             {
+              user?.email?
+             <div>
+               <a href=' ' className=" btn btn-outline btn-warning">Appointment</a> 
+               <Link className='btn btn-outline outline-primary-focus ml-4' to="/signout">exit</Link>
+             </div>
+              :
+              <div>
+                <Link className='btn btn-outline outline-primary-focus ml-4' to="/signin">Sign In</Link>
+                <Link className='btn btn-outline outline-primary-focus ml-4' to="/signup">Sign Up</Link>
+              </div>
+             }
             </div>
           </div>
        </div>
